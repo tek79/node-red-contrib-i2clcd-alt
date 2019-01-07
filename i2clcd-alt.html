@@ -1,5 +1,5 @@
 
-<script type="text/x-red" data-template-name="i2clcd-alt">
+<script type="text/x-red" data-template-name="i2clcd">
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
         <input type="text" id="node-input-name" placeholder="Name">
@@ -22,7 +22,7 @@
     </div>
 </script>
 
-<script type="text/x-red" data-help-name="i2clcd-alt">
+<script type="text/x-red" data-help-name="i2clcd">
     <p>Write to LCD with i2c backpack</p>
     
     <p>Inject message with <b>msg.topic</b> as <i>line1</i> to <i>line4</i> and prints <b>msg.payload</b> to each line</p>
@@ -32,7 +32,7 @@
 </script>
 
 <script type="text/javascript">
-    RED.nodes.registerType('i2clcd-alt',{
+    RED.nodes.registerType('i2clcd',{
         category: 'output',
         color: "#2C75FF",
         defaults: {
@@ -47,7 +47,7 @@
         icon: "arrow-out.png",
         align: 'right',
         label: function() {
-            return this.name||"i2clcd-alt";
+            return this.name||"i2clcd";
         }
     });
 </script>
