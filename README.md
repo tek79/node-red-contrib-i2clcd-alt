@@ -12,9 +12,13 @@ https://github.com/craigmw/lcdi2c
 
 https://github.com/wilberforce/lcd-pcf8574
 
-Use topic *line1* through *line4* to send *msg.payload* to each line, and topic *clear* to clear screen. Messages will be truncated at the length specified in the node's column setting.
-
 Updated to use i2c-bus instead of i2c, which will not compile on Armbian/Orange Pi.
+
+Set node configuration to match your devices. Defaults to: i2c bus *0*, address *0x3f* and a *20 x 4* (2004) LCD
+
+Use topic *line1* through *line4* to send *msg.payload* to each line. Messages will be truncated at the length specified in the node's column setting.
+Use topic *clear* to clear screen. 
+Use topic *init* to re-initialize screen. 
 
 Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 10.15.0
 
