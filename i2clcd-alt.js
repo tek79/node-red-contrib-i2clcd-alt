@@ -368,6 +368,6 @@ module.exports = function(RED) {
       });
    }
       
-   RED.nodes.registerType("i2clcd",LcdNode);
+   RED.nodes.registerType("i2clcd-alt",LcdNode);
     
 }
