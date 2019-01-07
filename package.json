@@ -17,7 +17,7 @@
   ],
   "node-red": {
     "nodes": {
-      "i2clcd alt": "i2clcd-alt.js"
+      "i2clcd-alt": "i2clcd-alt.js"
     }
   },
   "repository": {
