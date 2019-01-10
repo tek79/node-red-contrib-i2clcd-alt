@@ -82,12 +82,11 @@ module.exports = function(RED) {
             }
         });
 
-        this.write4Async(0x03, this.displayPorts.CMD); //initialization
-        this.write4Async(0x03, this.displayPorts.CMD);
-        this.write4Async(0x03, this.displayPorts.CMD);
-        this.write4Async(0x02, this.displayPorts.CMD);
+        this.write4Async(0x30, this.displayPorts.CMD); //initialization
+        this.write4Async(0x30, this.displayPorts.CMD);
+        this.write4Async(0x30, this.displayPorts.CMD);
 
-        this.write4Async(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x10DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
+        this.write4Async(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
         this.writeAsync(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
         this.writeAsync(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
