@@ -82,15 +82,16 @@ module.exports = function(RED) {
             }
         });
 
-        this.write4Async(0x30, this.displayPorts.CMD); //initialization
-        this.write4Async(0x30, this.displayPorts.CMD); //initialization
-        this.write4Async(0x30, this.displayPorts.CMD); //initialization
+        this.write4Async(0x03, this.displayPorts.CMD); //initialization
+        this.write4Async(0x03, this.displayPorts.CMD);
+        this.write4Async(0x03, this.displayPorts.CMD);
+        this.write4Async(0x02, this.displayPorts.CMD);
 
-        this.write4Async(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x10DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
+        this.write4Async(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
-        this.writeAsync(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //turn cursor off 0x0E to enable cursor
-        this.writeAsync(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //shift cursor right
-        this.writeAsync(this.CLEARDISPLAY, this.displayPorts.CMD); // LCD clear
+        this.writeAsync(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
+        this.writeAsync(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
+        this.writeAsync(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //set entry mode left
         this._sleep(2);
        
         return this;
@@ -129,14 +130,14 @@ module.exports = function(RED) {
                 this.error = err;
             }
         });
-
+    this._sleep(2);
         //Had to add this as it fixes a weird bug where the display was showing garbled text after a few minutes
         //Found this solution by accident though...
-        this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
-            if (err) {
-                this.error = err;
-            }
-        });
+        //this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
+        //    if (err) {
+        //        this.error = err;
+        //    }
+        //});
     };
 
     write4Block(x, c) {
@@ -208,6 +209,7 @@ module.exports = function(RED) {
             //Set cursor to correct line.
             if (line > 0 && line <= this.rows) {
                 this.write(this.LINEADDRESS[line - 1], this.displayPorts.CMD);
+                this._sleep(2);
             }
             this.print(str.substring(0, this.cols));
         }
