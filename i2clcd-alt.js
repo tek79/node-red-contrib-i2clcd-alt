@@ -82,15 +82,19 @@ module.exports = function(RED) {
             }
         });
 
-        this.write4Async(0x30, this.displayPorts.CMD); //initialization
-        this.write4Async(0x30, this.displayPorts.CMD);
-        this.write4Async(0x30, this.displayPorts.CMD);
+        this.write4(0x30, this.displayPorts.CMD); //initialization
+        this._sleep(4.5);
+        this.write4(0x30, this.displayPorts.CMD);
+        this._sleep(4.5);
+        this.write4(0x30, this.displayPorts.CMD);
+        this._sleep(0.15);
+        this.write4(0x20, this.displayPorts.CMD);
 
-        this.write4Async(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
+        this.write4(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
-        this.writeAsync(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
-        this.writeAsync(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
-        this.writeAsync(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //set entry mode left
+        this.write(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
+        this.write(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
+        this.write(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //set entry mode left (text flows left to right)
         this._sleep(2);
        
         return this;
@@ -129,14 +133,14 @@ module.exports = function(RED) {
                 this.error = err;
             }
         });
-    this._sleep(2);
+
         //Had to add this as it fixes a weird bug where the display was showing garbled text after a few minutes
         //Found this solution by accident though...
-        //this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
-        //    if (err) {
-        //        this.error = err;
-        //    }
-        //});
+        this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
+            if (err) {
+                this.error = err;
+            }
+        });
     };
 
     write4Block(x, c) {
@@ -169,6 +173,7 @@ module.exports = function(RED) {
 
     clear() {
         return this.write(this.CLEARDISPLAY, this.displayPorts.CMD);
+        this._sleep(2);
     };
 
     print(str) {
@@ -351,19 +356,19 @@ module.exports = function(RED) {
          }
 
          if (msg.topic.localeCompare("line1") == 0) {
-             lcd.printlnAsync(msg.payload, 1);
+             lcd.println(msg.payload, 1);
          }
 
          if (msg.topic.localeCompare("line2") == 0) {
-             lcd.printlnAsync(msg.payload, 2);
+             lcd.println(msg.payload, 2);
          }
          
          if (msg.topic.localeCompare("line3") == 0) {
-             lcd.printlnAsync(msg.payload, 3);
+             lcd.println(msg.payload, 3);
          }
          
          if (msg.topic.localeCompare("line4") == 0) {
-             lcd.printlnAsync(msg.payload, 4);
+             lcd.println(msg.payload, 4);
          }
          node.send(msg); //pass message through
       });
