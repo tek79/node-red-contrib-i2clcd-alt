@@ -88,7 +88,7 @@ module.exports = function(RED) {
         this._sleep(4.5);
         this.write4(0x30, this.displayPorts.CMD);
         this._sleep(0.15);
-        this.write4(0x20, this.displayPorts.CMD);
+        //this.write4(0x20, this.displayPorts.CMD);
 
         this.write4(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
