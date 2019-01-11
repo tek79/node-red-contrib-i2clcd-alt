@@ -173,7 +173,7 @@ module.exports = function(RED) {
 
     clear() {
         return this.write(this.CLEARDISPLAY, this.displayPorts.CMD);
-        this._sleep(2);
+        this._sleep(4);
     };
 
     print(str) {
