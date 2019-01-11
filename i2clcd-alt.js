@@ -16,7 +16,7 @@ module.exports = function(RED) {
             CMD: 0,
 
             backlight: 0x08,
-            RW: 0x20 // not used
+            RW: 0x02 // not used (?), and why is this wrong in every other library?
         };
 
         this.buffer = new Buffer(3);  //Required for printlnBuffer.
