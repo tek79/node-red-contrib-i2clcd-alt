@@ -1,8 +1,8 @@
-****Intro and Usage****
+#Intro and Usage
 
 ![img here](img01.png)
 
-A simple node-red node that provides control of 1602/2004 LCDs with a PCF8574P i2c driver backpack. Based on the following libraries:
+A simple node-red node that provides control of 1602/2004 LCDs with a PCF8574T/AT i2c driver backpack. Based on the following libraries:
 
 https://github.com/sweetpi/i2c-lcd/
 
@@ -22,17 +22,21 @@ Use topic **clear** to clear screen.
 
 Use topic **init** to re-initialize screen. 
 
-Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 10.15.0
+Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 8.15.0, Node 10.15.0
+
+Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 
 ****Requirements****
 
 - ARM-based SBC with i2c bus
-- 1602 or 2004 LCD panel that has a PCF8574P i2c driver
+- 1602 or 2004 LCD panel that has a PCF8574T/AT i2c driver
 - i2c-bus node (available in npm repo)
 
 ****Notes****
 
-- Fast updates can cause the display to glitch out, so consider using the Delay node in rate limiting mode if you have input that changes very quickly
+- Rate limiting of incoming messages is not necessary when using this library.
+
+- Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this althoug it appears to be working.
 
 Tek79
 
