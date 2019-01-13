@@ -30,13 +30,13 @@ Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 
 - ARM-based SBC with i2c bus
 - 1602 or 2004 LCD panel that has a PCF8574T/AT i2c driver
-- i2c-bus node (available in npm repo)
+- node dependencies: i2c-bus, sleep
 
 ****Notes****
 
 - Rate limiting of incoming messages is not necessary when using this library.
 
-- Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this althoug it appears to be working.
+- Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this although it appears to be working.
 
 Tek79
 
