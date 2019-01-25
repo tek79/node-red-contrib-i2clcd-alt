@@ -38,6 +38,8 @@ Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 
 - Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this although it appears to be working.
 
+- Periodic re-initialization of the display may be necessary and seems dependent on outside factors. (Other processes running in node-red.) It appears that the display stops operating in 4-bit mode, which is a requirement of the PCF8574-based displays. This will cause the display to either become blank, or display random characters. Sending **init** to the display at a fixed interval is recommended if you encounter this issue. If anyone is able to spot the cause of this issue, please suggest a solution in the issues section.
+
 Tek79
 
 January 2019
