@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "A node-red node that outputs to a 1602/2004 i2c LCD",
   "dependencies": {
-    "i2c-bus": "^1.0.2",
-    "sleep": "^3.0.1"
+    "i2c-bus": "^5.2.0",
+    "sleep": "^6.3.0"
   },
   "keywords": [
     "node-red",
