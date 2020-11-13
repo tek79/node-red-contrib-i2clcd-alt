@@ -329,7 +329,7 @@ module.exports = function(RED) {
       lcd = new LCD(this.LCD_BUS,this.LCD_ADDR,this.LCD_NUMCOLS,this.LCD_NUMROWS);
           
       this.on('input', function(msg) {
-         console.log("LCD input "+msg.topic);
+         /** console.log("LCD input "+msg.topic); */
          if (msg.topic.localeCompare("init") == 0) {
              lcd._init();
          }
