@@ -46,7 +46,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 ****Example****
 
-`[{"id":"1bac6e76.a8fcc2","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"52127114.471f9","type":"i2clcd-alt","z":"1bac6e76.a8fcc2","name":"i2clcd-alt","addr":"0x27","bus":"1","numcols":"20","numrows":"4","x":680,"y":280,"wires":[[]]},{"id":"3bf9759f.b152ea","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line1","payload":"Hello node-red!","payloadType":"str","x":450,"y":240,"wires":[["52127114.471f9"]]},{"id":"a904459c.5e7ac8","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line2","payload":"from RPi","payloadType":"str","x":430,"y":320,"wires":[["52127114.471f9"]]}]`
+`[{"id":"1bac6e76.a8fcc2","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"52127114.471f9","type":"i2clcd-alt","z":"1bac6e76.a8fcc2","name":"i2clcd-alt","addr":"0x3f","bus":"1","numcols":"20","numrows":"4","x":680,"y":280,"wires":[[]]},{"id":"3bf9759f.b152ea","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line1","payload":"Hello node-red!","payloadType":"str","x":450,"y":240,"wires":[["52127114.471f9"]]},{"id":"a904459c.5e7ac8","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line2","payload":"from RPi","payloadType":"str","x":430,"y":320,"wires":[["52127114.471f9"]]}]`
 
 ****Notes****
 
