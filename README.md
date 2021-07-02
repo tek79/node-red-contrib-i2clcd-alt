@@ -2,7 +2,9 @@
 
 ![img here](img01.png)
 
-****V2 is not ready for use****
+****V2 removes the Sleep dependency****
+- This version removes the Sleep dependency, which is not currently working on Node > 14.x
+- Although preliminary testing looks good, this version does not have the same 17,000+ hours of use that the original library has gone through.
 
 A simple node-red node that provides control of 1602/2004 LCDs with a PCF8574T/AT i2c driver backpack. Based on the following libraries:
 
@@ -48,7 +50,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 ****Example****
 
-`[{"id":"1bac6e76.a8fcc2","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"52127114.471f9","type":"i2clcd-alt","z":"1bac6e76.a8fcc2","name":"i2clcd-alt","addr":"0x27","bus":"1","numcols":"20","numrows":"4","x":680,"y":280,"wires":[[]]},{"id":"3bf9759f.b152ea","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line1","payload":"Hello node-red!","payloadType":"str","x":450,"y":240,"wires":[["52127114.471f9"]]},{"id":"a904459c.5e7ac8","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line2","payload":"from RPi","payloadType":"str","x":430,"y":320,"wires":[["52127114.471f9"]]}]`
+`[{"id":"1bac6e76.a8fcc2","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"52127114.471f9","type":"i2clcd-alt","z":"1bac6e76.a8fcc2","name":"i2clcd-alt","addr":"0x3f","bus":"1","numcols":"20","numrows":"4","x":680,"y":280,"wires":[[]]},{"id":"3bf9759f.b152ea","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line1","payload":"Hello node-red!","payloadType":"str","x":450,"y":240,"wires":[["52127114.471f9"]]},{"id":"a904459c.5e7ac8","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line2","payload":"from RPi","payloadType":"str","x":430,"y":320,"wires":[["52127114.471f9"]]}]`
 
 ****Notes****
 
