@@ -82,23 +82,23 @@ module.exports = function(RED) {
         });
 
         this.write4(0x33, this.displayPorts.CMD); //initialization
-        sleep(5);
+        this._sleep(5);
         this.write4(0x33, this.displayPorts.CMD);
-        sleep(5);
+        this._sleep(5);
         this.write4(0x32, this.displayPorts.CMD);
-        sleep(1);
+        this._sleep(1);
 
         this.write4(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
         this.write(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
         this.write(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
         this.write(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //set entry mode left (text flows left to right)
-        sleep(2);
+        this._sleep(2);
        
         return this;
     };
       
-    function sleep(ms) {
+    _sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
@@ -111,7 +111,7 @@ module.exports = function(RED) {
         } catch (err) {
             this.error = err;
         }
-        sleep(2);
+        this._sleep(2);
     };
 
     write4Async(x, c) {
@@ -148,7 +148,7 @@ module.exports = function(RED) {
         this.buffer[2] = a | this.displayPorts.backlight | c;
 
         this.i2c.writeI2cBlockSync(this.address, 1, this.buffer.length, this.buffer);
-        sleep(2);
+        this._sleep(2);
     };
 
     write(x, c) {
@@ -171,7 +171,7 @@ module.exports = function(RED) {
 
     clear() {
         return this.write(this.CLEARDISPLAY, this.displayPorts.CMD);
-        sleep(4);
+        this._sleep(4);
     };
 
     print(str) {
@@ -179,7 +179,7 @@ module.exports = function(RED) {
             for (let i = 0; i < str.length; i++) {
                 let c = str[i].charCodeAt(0);
                 this.write(c, this.displayPorts.CHR);
-                sleep(2);
+                this._sleep(2);
             }
         }
         return this;
@@ -190,7 +190,7 @@ module.exports = function(RED) {
             for (let i = 0; i < str.length; i++) {
                 let c = str[i].charCodeAt(0);
                 this.writeAsync(c, this.displayPorts.CHR);
-                sleep(2);
+                this._sleep(2);
             }
         }
         return this;
@@ -201,7 +201,7 @@ module.exports = function(RED) {
             for (let i = 0; i < str.length; i++) {
                 let c = str[i].charCodeAt(0);
                 this.writeBlock(c, this.displayPorts.CHR);
-                sleep(2);
+                this._sleep(2);
             }
         }
     };
@@ -211,7 +211,7 @@ module.exports = function(RED) {
             //Set cursor to correct line.
             if (line > 0 && line <= this.rows) {
                 this.write(this.LINEADDRESS[line - 1], this.displayPorts.CMD);
-                sleep(2);
+                this._sleep(2);
             }
             this.print(str.substring(0, this.cols));
         }
