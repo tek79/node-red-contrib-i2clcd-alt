@@ -2,6 +2,8 @@
 
 ![img here](img01.png)
 
+****V2 is not ready for use****
+
 A simple node-red node that provides control of 1602/2004 LCDs with a PCF8574T/AT i2c driver backpack. Based on the following libraries:
 
 https://github.com/sweetpi/i2c-lcd/
@@ -32,7 +34,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 - ARM-based SBC with i2c bus
 - 1602 or 2004 LCD panel that has a PCF8574T/AT i2c driver
-- node dependencies: i2c-bus, sleep
+- node dependencies: i2c-bus
 
 ****Installation****
 
