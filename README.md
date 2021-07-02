@@ -1,10 +1,10 @@
-****Intro and Usage****
-
-![img here](img01.png)
-
 ****V2 removes the Sleep dependency****
 - This version removes the Sleep dependency, which is not currently working on Node > 14.x
 - Although preliminary testing looks good, this version does not have the same 17,000+ hours of use that the original library has gone through.
+
+****Intro and Usage****
+
+![img here](img01.png)
 
 A simple node-red node that provides control of 1602/2004 LCDs with a PCF8574T/AT i2c driver backpack. Based on the following libraries:
 
