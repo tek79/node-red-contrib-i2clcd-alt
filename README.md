@@ -1,3 +1,8 @@
+****Update, there is now a V2 of this module for Node versions > 14.x****
+
+Go [here](https://github.com/tek79/node-red-contrib-i2clcd-alt/tree/v2) for the new version.
+
+
 ****Intro and Usage****
 
 ![img here](img01.png)
