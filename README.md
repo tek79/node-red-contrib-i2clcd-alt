@@ -22,9 +22,11 @@ Use topic **clear** to clear screen.
 
 Use topic **init** to re-initialize screen. 
 
-Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 8.15.0, Node 10.15.0
+Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 8.15.0, Node 10.15.0, Node 12.x
 
 Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
+
+Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 ****Requirements****
 
@@ -32,14 +34,21 @@ Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 - 1602 or 2004 LCD panel that has a PCF8574T/AT i2c driver
 - node dependencies: i2c-bus, sleep
 
+****Installation****
+
+- Install using npm, then restart Node-RED:
+`npm install tek79/node-red-contrib-i2clcd-alt`
+
+****Example****
+
+`[{"id":"1bac6e76.a8fcc2","type":"tab","label":"Flow 1","disabled":false,"info":""},{"id":"52127114.471f9","type":"i2clcd-alt","z":"1bac6e76.a8fcc2","name":"i2clcd-alt","addr":"0x27","bus":"1","numcols":"20","numrows":"4","x":680,"y":280,"wires":[[]]},{"id":"3bf9759f.b152ea","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line1","payload":"Hello node-red!","payloadType":"str","x":450,"y":240,"wires":[["52127114.471f9"]]},{"id":"a904459c.5e7ac8","type":"inject","z":"1bac6e76.a8fcc2","name":"","props":[{"p":"topic","vt":"str"},{"p":"payload"}],"repeat":"","crontab":"","once":false,"onceDelay":0.1,"topic":"line2","payload":"from RPi","payloadType":"str","x":430,"y":320,"wires":[["52127114.471f9"]]}]`
+
 ****Notes****
 
 - Rate limiting of incoming messages is not necessary when using this library.
 
 - Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this although it appears to be working.
 
-- Periodic re-initialization of the display may be necessary and seems dependent on outside factors. (Other processes running in node-red.) It appears that the display stops operating in 4-bit mode, which is a requirement of the PCF8574-based displays. This will cause the display to either become blank, or display random characters. Sending **init** to the display at a fixed interval is recommended if you encounter this issue. If anyone is able to spot the cause of this issue, please suggest a solution in the issues section.
+- Periodic re-initialization of the display may be necessary and seems dependent on outside factors. The display may become blank or display random characters. Sending **init** to the display at a fixed interval is recommended if you encounter this issue. If anyone is able to spot the cause of this issue, please suggest a solution in the issues section. Update, 2021-07-01: this issue was caused by nearby AC electrical interference.
 
 Tek79
-
-January 2019
