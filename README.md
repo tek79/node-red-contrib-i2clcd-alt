@@ -28,6 +28,8 @@ Use topic **init** to re-initialize screen.
 
 Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 8.15.0, Node 10.15.0, Node 12.x
 
+Tested on Armbian Focal on Orange Pi Zero (H2) hardware under Node Node 12.x, Node 16.x
+
 Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 
 Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
