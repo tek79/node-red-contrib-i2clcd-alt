@@ -1,6 +1,6 @@
 module.exports = function(RED) {
    const i2c = require('i2c-bus');
-   var sleep = require('system-sleep');
+   const sleep = require('system-sleep');
 
    let LCD = class LCD {
     constructor(device, address, cols, rows) {
