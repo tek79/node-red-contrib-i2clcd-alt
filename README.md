@@ -52,8 +52,6 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 - Rate limiting of incoming messages is not necessary when using this library.
 
-- Node sleep (dependency) seems to install with some errors under Node versions > 8.x, investigating replacing this although it appears to be working.
-
 - Periodic re-initialization of the display may be necessary and seems dependent on outside factors. The display may become blank or display random characters. Sending **init** to the display at a fixed interval is recommended if you encounter this issue. If anyone is able to spot the cause of this issue, please suggest a solution in the issues section. Update, 2021-07-01: this issue was caused by nearby AC electrical interference.
 
 - Not sure of your device's I2C address?
