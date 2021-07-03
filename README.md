@@ -26,11 +26,9 @@ Use topic **clear** to clear screen.
 
 Use topic **init** to re-initialize screen. 
 
-Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node 8.15.0, Node 10.15.0, Node 12.x
+Tested on Armbian Bionic on Orange Pi Zero (H2) hardware under Node Node 12.x
 
 Tested on Armbian Focal on Orange Pi Zero (H2) hardware under Node Node 12.x, Node 16.x
-
-Tested on Armbian Bionic on Orange Pi One (H3) hardware under Node 10.15.0
 
 Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
@@ -62,7 +60,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 - Not sure of your device's I2C address?
 
-`sudo apt-get install -y python3-smbus i2c-tools`
+`sudo apt-get install python3-smbus i2c-tools`
 
 `sudo i2cdetect -y 1` or subsitiute your I2C bus number in place of '1' if you know you are using a different bus.
 
