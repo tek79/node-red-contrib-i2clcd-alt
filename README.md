@@ -61,7 +61,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 - Not sure of your device's I2C address?
 
-`sudo apt-get install -y python3-smbus i2c-tools`
+`sudo apt-get install python3-smbus i2c-tools`
 
 `sudo i2cdetect -y 1` or subsitiute your I2C bus number in place of '1' if you know you are using a different bus.
 
