@@ -46,7 +46,7 @@ Tested on Ubuntu Server 20.04 LTS on Raspberry Pi 3 B+ hardware under Node 12.x
 
 `cd .node-red`
 
-`npm install tek79/node-red-contrib-i2clcd-alt`
+`npm install tek79/node-red-contrib-i2clcd-alt#v2`
 
 ****Example****
 
