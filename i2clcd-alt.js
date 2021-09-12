@@ -15,10 +15,8 @@ module.exports = function(RED) {
             CMD: 0,
 
             backlight: 0x08,
-            RW: 0x02 // not used (?), and why is this wrong in every other library?
+            RW: 0x02
         };
-
-        this.buffer = new Buffer(3);  //Required for printlnBuffer.
 
         // commands
         this.CLEARDISPLAY = 0x01;
@@ -93,7 +91,6 @@ module.exports = function(RED) {
         this.write(this.DISPLAYCONTROL | this.DISPLAYON, this.displayPorts.CMD); //LCD on
         this.write(this.CLEARDISPLAY, this.displayPorts.CMD); //LCD clear
         this.write(this.ENTRYMODESET | this.ENTRYLEFT, this.displayPorts.CMD); //set entry mode left (text flows left to right)
-        this._sleep(2);
        
         return this;
     };
@@ -117,44 +114,6 @@ module.exports = function(RED) {
         } catch (err) {
             this.error = err;
         }
-        this._sleep(2);
-    };
-
-    write4Async(x, c) {
-        let a = (x & 0xF0); // Use upper 4 bit nibble
-        this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
-            if (err) {
-                this.error = err;
-            }
-        });
-        this.i2c.sendByte(this.address, a | this.displayPorts.E | this.displayPorts.backlight | c, (err) => {
-            if (err) {
-                this.error = err;
-            }
-        });
-        this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
-            if (err) {
-                this.error = err;
-            }
-        });
-
-        //Had to add this as it fixes a weird bug where the display was showing garbled text after a few minutes
-        //Found this solution by accident though...
-        this.i2c.sendByte(this.address, a | this.displayPorts.backlight | c, (err) => {
-            if (err) {
-                this.error = err;
-            }
-        });
-    };
-
-    write4Block(x, c) {
-        let a = (x & 0xF0 );
-        this.buffer[0] = a | this.displayPorts.backlight | c;
-        this.buffer[1] = a | this.displayPorts.E | this.displayPorts.backlight | c;
-        this.buffer[2] = a | this.displayPorts.backlight | c;
-
-        this.i2c.writeI2cBlockSync(this.address, 1, this.buffer.length, this.buffer);
-        this._sleep(2);
     };
 
     write(x, c) {
@@ -163,21 +122,8 @@ module.exports = function(RED) {
         return this;
     };
 
-    writeAsync(x, c) {
-        this.write4Async(x, c);
-        this.write4Async(x << 4, c);
-        return this;
-    };
-
-    writeBlock(x, c) {
-        this.write4Block(x, c);
-        this.write4Block(x << 4, c);
-        return this;
-    };
-
     clear() {
         return this.write(this.CLEARDISPLAY, this.displayPorts.CMD);
-        this._sleep(4);
     };
 
     print(str) {
@@ -185,31 +131,9 @@ module.exports = function(RED) {
             for (let i = 0; i < str.length; i++) {
                 let c = str[i].charCodeAt(0);
                 this.write(c, this.displayPorts.CHR);
-                this._sleep(2);
             }
         }
         return this;
-    };
-
-    printAsync(str) {
-        if (typeof str === 'string') {
-            for (let i = 0; i < str.length; i++) {
-                let c = str[i].charCodeAt(0);
-                this.writeAsync(c, this.displayPorts.CHR);
-                this._sleep(2);
-            }
-        }
-        return this;
-    };
-
-    printBlock(str) {
-        if (typeof str === 'string') {
-            for (let i = 0; i < str.length; i++) {
-                let c = str[i].charCodeAt(0);
-                this.writeBlock(c, this.displayPorts.CHR);
-                this._sleep(2);
-            }
-        }
     };
 
     println(str, line) {
@@ -217,33 +141,8 @@ module.exports = function(RED) {
             //Set cursor to correct line.
             if (line > 0 && line <= this.rows) {
                 this.write(this.LINEADDRESS[line - 1], this.displayPorts.CMD);
-                this._sleep(2);
             }
             this.print(str.substring(0, this.cols));
-        }
-        return this;
-    };
-
-    printlnAsync(str, line) {
-        if (typeof str === 'string') {
-            //Set cursor to correct line.
-            if (line > 0 && line <= this.rows) {
-                this.writeAsync(this.LINEADDRESS[line - 1], this.displayPorts.CMD);
-            }
-            this.printAsync(str.substring(0, this.cols));
-        }
-        return this;
-
-    };
-
-    printlnBlock(str, line) {
-        if (typeof str === 'string') {
-            if (line > 0) {
-                this.write(this.LINEADDRESS[line - 1], this.displayPorts.CMD);
-            }
-
-            //Now, write block to i2c.
-            this.printBlock(str.substring(0, this.cols));
         }
         return this;
     };
