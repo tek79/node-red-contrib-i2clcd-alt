@@ -1,3 +1,8 @@
+****V3 removes all unused/unnecessary code****
+- This version removes all unused async write and block write functions as well as many unnecessary sleep calls.
+- The only remaining sleep calls are in the init function.
+- This is an attempt to increase the responsiveness of the display.
+
 ****V2 removes the Sleep dependency****
 - This version removes the Sleep dependency, which is not currently working on Node > 14.x
 - Although preliminary testing looks good, this version does not have the same 17,000+ hours of use that the original library has gone through.
