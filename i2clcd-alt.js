@@ -80,11 +80,10 @@ module.exports = function(RED) {
         });
 
         this.write4(0x33, this.displayPorts.CMD); //initialization
-        this._sleep(5);
+        this._sleep(4);
         this.write4(0x33, this.displayPorts.CMD);
-        this._sleep(5);
+        this._sleep(4);
         this.write4(0x32, this.displayPorts.CMD);
-        this._sleep(1);
 
         this.write4(this.FUNCTIONSET | this._4BITMODE | this._2LINE | this._5x8DOTS, this.displayPorts.CMD); //4 bit - 2 line 5x7 matrix
 
@@ -114,6 +113,7 @@ module.exports = function(RED) {
         } catch (err) {
             this.error = err;
         }
+       this._sleep(1);
     };
 
     write(x, c) {
